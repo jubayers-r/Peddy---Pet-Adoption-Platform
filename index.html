@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peddy</title>
+    <link rel="shortcut icon" href="./images/logo.webp" type="image/x-icon" />
+    <link rel="stylesheet" href="./output.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body class="font-[lato] w-10/12 mx-auto">
+    <header class=" py-7">
+      <nav class="flex justify-between items-center">
+        <!-- logo -->
+         <div class="flex gap-2 items-center w-35">
+            <div class="">
+                <img src="./images/logo.webp" alt="" class="">
+            </div>
+            <h1 class="font-black text-4xl">Peddy</h1>
+         </div>
+         <!-- nav -->
+            <ul class="flex gap-15 text-gray-600">
+                <li>Home</li>
+                <li>Shop</li>
+                <li>Contact</li>
+            </ul>
+         <!-- profile icon -->
+          <div class="w-35 flex justify-end">
+              <img class="" width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/48/user-male-circle--v1.png" alt="user-male-circle--v1"/>
+          </div>
+      </nav>
+      <!-- hero section -->
+       <div class="py-12 w-[752px] text-center mx-auto space-y-10">
+             <h6 class="text-gray-600 text-2xl font-bold">Bringing Families Together ❤️‍🔥</h6>
+             <h1 class="font-black text-7xl/[88px]">Your Path to Adoption Starts Here</h1>
+             <p >It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+             <button onclick="window.location='#main-section'" class="btn bg-[#0E7A81] text-white px-8  rounded-xl">View More</button>
+             <div class="">
+                <img src="./images/pet.webp" alt="">
+             </div>
+       </div>
+    </header>
+    <!-- main section -->
+    <main id="main-section" class="py-12">
+        <!-- main title -->
+        <div class="w-[636px] text-center mx-auto space-y-6">
+            <h1 class="font-black text-4xl">Adopt Your Best Friend</h1>
+            <p class="text-gray-600">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+        </div>
+        <!-- categories -->
+        <div class="grid grid-cols-4 gap-6 py-12" id="categories">
+        </div>
+        <div class="flex justify-between py-8 items-center">
+            <h1 class="font-black text-2xl">Best Deal for You</h1>
+            <button class="btn btn-lg bg-[#0E7A81] text-white p-7 rounded-xl">Sort by price</button>
+        </div>
+        <div class="grid grid-cols-4 gap-6">
+            <!--  Deals columns -->
+            <div class="col-span-3">
+                <div class="grid grid-cols-3 gap-6" id="deals">
+
+                </div>
+            </div>
+            <!-- liked column -->
+            <div class="grid grid-cols-2" id="selected">
+                <div class="card bg-base-100 shadow-sm rounded-xl p-5 border-1 border-gray-200">
+                    <figure class="">
+                      <img
+                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                        alt="Shoes"
+                        class="rounded-xl" />
+                    </figure>
+                    <div class="card-body items-center text-center">
+                      <h2 class="card-title">Card Title</h2>
+                      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                      <div class="card-actions">
+                        <button class="btn btn-primary">Buy Now</button>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </main>
+    <!-- modal -->
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+
+</dialog>
+    <script src="./script.js"></script>
+  </body>
+</html>
