@@ -1,9 +1,8 @@
+// help
+// like btn (selected column grid problem)
+
 // todo
 // responsive page (main)
-// on category btn click (challenge(loading))
-// adopt btn (challenge (behavior, 3 sec wait))
-// like btn
-// selected column
 // sort
 // footer
 // readme file
@@ -15,13 +14,23 @@ for (btn of btns) {
 }
 }
 function loadCategoryPets(petCategory){
-    fetch(`https://openapi.programming-hero.com/api/peddy/category/${petCategory}`)
+  // Show loading spinner
+  const dealsSection = document.getElementById('deals');
+  dealsSection.classList.remove('grid');
+  dealsSection.innerHTML = `
+    <div class="flex justify-center items-center min-h-[300px]">
+      <span class="loading loading-bars loading-xl text-[#0E7A81]"></span>
+    </div>
+  `;
+
+  fetch(`https://openapi.programming-hero.com/api/peddy/category/${petCategory}`)
+    .then(res => new Promise(resolve => setTimeout(() => resolve(res), 2000)))
     .then(res => res.json())
     .then(data => {
-        removeClass();
-        const activeBtn = document.getElementById(petCategory);
-        activeBtn.classList.add('active');
-        displayPets(data.data)})
+      removeClass();
+      const activeBtn = document.getElementById(petCategory);
+      activeBtn.classList.add('active');
+      displayPets(data.data)})
     .catch(err => console.log(err))
 }
 function loadCategories(){
@@ -49,8 +58,6 @@ loadCategoryPets(category.category);
 categoriesSection.append(btn);
 });
 }
-
-
 function loadPets(){
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
     .then(res => res.json())
@@ -124,6 +131,50 @@ modal.innerHTML =  `
   </div>
 `;
 }
+function displayCountdown (petId) {
+  const modal = document.getElementById('my_modal_5');
+  const adoptBtn = document.getElementById(petId);
+  modal.showModal();
+  let timeLeft = 3;
+
+  modal.innerHTML = `
+    <div class="modal-box text-center">
+    <h1 class="font-bold text-3xl ">Congrats</h1>
+    <p>Adoption process is started for your pet</p>
+      <span class="countdown text-9xl">
+        <span id="countdown-value" style="--value:3;" aria-live="polite" aria-label="3">3</span>
+      </span>
+      <div class="modal-action">
+      </div>
+    </div>
+  `;
+
+  const countdownInterval = setInterval(() => {
+    timeLeft--;
+    const countdownElement = document.getElementById('countdown-value');
+    if (countdownElement) {
+      countdownElement.style = `--value:${timeLeft}`;
+      countdownElement.textContent = timeLeft;
+    }
+    if (timeLeft <= 0) {
+      clearInterval(countdownInterval);
+      modal.close();
+      adoptBtn.innerText = "Adopted";
+      adoptBtn.classList = "btn text-lg bg-gray-300 text-white";
+    }
+  }, 1000);
+}
+function selected (image) {
+  const selectedDiv = document.getElementById("selected");
+  const selected = document.createElement("div");
+  selected.innerHTML = `
+                    <img
+                      src="${image}"
+                      alt=""
+                      class="rounded-xl" />
+  `;
+  selectedDiv.append(selected);
+}
 
 function displayPets(pets){
 const dealsSection = document.getElementById('deals');
@@ -186,13 +237,13 @@ card.innerHTML = `
     <hr class="text-gray-200 my-4">
     <div class="grid grid-cols-4 text-lg font-bold">
     <div >
-    <button class="btn text-[#0E7A81]" >
+    <button onclick = "selected ('${pet.image}')" class="btn text-[#0E7A81]" >
     <img src="   https://cdn-icons-png.flaticon.com/512/126/126473.png " width="20" height="20" alt="" title="" class="img-small">
     </button>
     </div>
     <div class= "col-span-3">
     <div class="grid grid-cols-2 gap-3">
-    <button class="btn text-[#0E7A81] text-lg id="adoptBtn">Adopt</button>
+    <button onclick="displayCountdown(${pet.petId})" class="btn text-[#0E7A81] text-lg" id="${pet.petId}">Adopt</button>
     <button onclick="loadModal (${pet.petId})" class="btn text-[#0E7A81] text-lg">Details</button>
     </div>
   </div>
