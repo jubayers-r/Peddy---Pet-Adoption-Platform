@@ -24,7 +24,7 @@
     <header class="py-7">
       <nav class="flex justify-between items-center">
         <!-- logo -->
-        <div class="flex gap-2 items-center w-35">
+        <div class="flex gap-2 items-center lg:w-35">
           <div class="">
             <img src="./images/logo.webp" alt="" class="" />
           </div>
@@ -83,11 +83,12 @@
         </p>
       </div>
       <!-- categories -->
-      <div class="grid grid-cols-4 gap-6 py-12" id="categories"></div>
+      <div class="grid grid-cols-4 gap-6 py-12 " id="categories"></div>
       <div class="flex justify-between py-8 items-center">
         <h1 class="font-black text-2xl">Best Deal for You</h1>
-        <button class="btn btn-lg bg-[#0E7A81] text-white p-7 rounded-xl">
+        <button onclick="sortByPrice()" class="btn btn-lg bg-[#0E7A81] text-white p-7 rounded-xl">
           Sort by price
+          (9-0)
         </button>
       </div>
       <div class="grid grid-cols-4 gap-6">
@@ -96,10 +97,13 @@
           <div class="grid grid-cols-3 gap-6" id="deals"></div>
         </div>
         <!-- liked column -->
-        <div
-          class="bg-base-100 shadow-sm rounded-xl p-5 border-1 border-gray-200 grid grid-cols-2 gap-6"
-          id="selected"
-        >
+         <div class="flex flex-col rounded-xl p-5 gap-4 border border-gray-200">
+           <div
+             class="grid grid-cols-2 gap-4" id="selected"
+
+           >
+         </div>
+
       </div>
       </div>
     </main>

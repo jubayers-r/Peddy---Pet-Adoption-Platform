@@ -1,9 +1,9 @@
 // help
 // like btn (selected column grid problem)
+// picture on details is working well, but on same logic, picture on displaypet doesnt work
 
 // todo
 // responsive page (main)
-// sort
 // footer
 // readme file
 //check requirements git
@@ -64,6 +64,18 @@ function loadPets(){
     .then(data => displayPets(data.pets))
     .catch(err => console.log(err))
 }
+function sortByPrice() {
+  fetch('https://openapi.programming-hero.com/api/peddy/pets')
+  .then(res => res.json())
+  .then(data => {
+    // Sort the pets array by price
+    const sortedPets = data.pets.sort((a, b) => {
+      return b.price - a.price;
+    });
+    displayPets(sortedPets);
+  })
+  .catch(err => console.log(err));
+}
 
 async function loadModal (petId) {
     my_modal_5.showModal();
@@ -76,30 +88,30 @@ function displayModal (petData){
 const modal = document.getElementById('my_modal_5');
 modal.innerHTML =  `
 <div class="modal-box">
-    <div>
-    <img src="${petData.image}" class="rounded-xl">
+    <div class= "max-h-[305px] max-w-[465px]">
+    <img src="${petData.image}" class="rounded-xl object-cover w-full h-full">
     </div>
     <h3 class="text-lg font-bold py-5">${petData.pet_name}</h3>
 
-<div class="grid grid-cols-3">
+<div class="grid grid-cols-2">
 <div>
 <div class="flex gap-1 items-center">
 <div>
 <img src="https://cdn-icons-png.flaticon.com/512/3934/3934041.png " width="17" height="17" alt="" title="" class="img-small">
 </div>
-<p class="text-black/70 font-normal text-base" >Breed: ${petData.breed ? `${petData.breed}` : 'unknown'}</p>
+<p class="text-black/70 font-normal text-base" >Breed: ${petData.breed ? `${petData.breed}` : 'Not Available'}</p>
 </div>
 <div class="flex gap-1 items-center">
   <div>
   <img src="   https://cdn-icons-png.flaticon.com/512/18297/18297619.png " width="17" height="17" alt="" title="" class="img-small">
   </div>
-  <p class="text-black/70 font-normal text-base" >Gender: ${petData.gender ? `${petData.gender}` : 'unknown'}</p>
+  <p class="text-black/70 font-normal text-base" >Gender: ${petData.gender ? `${petData.gender}` : 'Not Available'}</p>
   </div>
 <div class="flex gap-1 items-center">
   <div>
   <img src="   https://cdn-icons-png.flaticon.com/512/18297/18297619.png " width="17" height="17" alt="" title="" class="img-small">
   </div>
-  <p class="text-black/70 font-normal text-base" >Vaccinated Status: ${petData.vaccinated_status ? `${petData.vaccinated_status}` : 'unknown'}</p>
+  <p class="text-black/70 font-normal text-base" >Vaccinated Status: ${petData.vaccinated_status ? `${petData.vaccinated_status}` : 'Not Available'}</p>
   </div>
 </div>
 <div>
@@ -107,13 +119,13 @@ modal.innerHTML =  `
   <div>
   <img src="https://cdn-icons-png.flaticon.com/512/3106/3106790.png " width="17" height="17" alt="" title="" class="img-small">
   </div>
-    <p class="text-black/70 font-normal text-base" >Birth: ${petData.date_of_birth ? `${petData.date_of_birth}` : 'unknown'}</p>
+    <p class="text-black/70 font-normal text-base" >Birth: ${petData.date_of_birth ? `${petData.date_of_birth}` : 'Not Available'}</p>
   </div>
  <div class="flex gap-1 items-center">
   <div>
  <img src="   https://cdn-icons-png.flaticon.com/512/2530/2530493.png " width="18" height="18" alt="" title="" class="img-small">
   </div>
-  <p class="text-black/70 font-normal text-base" >Price : ${petData.price ? `${petData.price} $` : 'unknown'}</p>
+  <p class="text-black/70 font-normal text-base" >Price : ${petData.price ? `${petData.price} $` : 'Not Available'}</p>
   </div>
 </div>
 </div>
@@ -167,14 +179,18 @@ function displayCountdown (petId) {
 function selected (image) {
   const selectedDiv = document.getElementById("selected");
   const selected = document.createElement("div");
+  selected.classList = "";
   selected.innerHTML = `
                     <img
                       src="${image}"
                       alt=""
-                      class="rounded-xl" />
+                      class="rounded-xl object-cover" />
   `;
   selectedDiv.append(selected);
 }
+
+
+
 
 function displayPets(pets){
 const dealsSection = document.getElementById('deals');
@@ -201,10 +217,9 @@ pets.forEach(pet => {
 
 card.innerHTML = `
 <div class="card bg-base-100 shadow-sm rounded-xl p-5 border-1 border-gray-200">
-  <div class="h-[220px] w-[330px]">
+  <div class="max-h-[200px] max-w-[320px]">
     <img
       src="${pet.image}"
-      alt="Shoes"
       class="rounded-xl object-cover h-full w-full" />
   </div>
   <div class="items-left text-left">
@@ -213,25 +228,25 @@ card.innerHTML = `
   <div>
   <img src="https://cdn-icons-png.flaticon.com/512/3934/3934041.png " width="17" height="17" alt="" title="" class="img-small">
   </div>
-  <p class="text-black/70 font-normal text-base" >Breed: ${pet.breed ? `${pet.breed}` : 'unknown'}</p>
+  <p class="text-black/70 font-normal text-base" >Breed: ${pet.breed ? `${pet.breed}` : 'Not Available'}</p>
   </div>
   <div class="flex gap-1 items-center">
   <div>
   <img src="https://cdn-icons-png.flaticon.com/512/3106/3106790.png " width="17" height="17" alt="" title="" class="img-small">
   </div>
-    <p class="text-black/70 font-normal text-base" >Birth: ${pet.date_of_birth ? `${pet.date_of_birth}` : 'unknown'}</p>
+    <p class="text-black/70 font-normal text-base" >Birth: ${pet.date_of_birth ? `${pet.date_of_birth}` : 'Not Available'}</p>
   </div>
   <div class="flex gap-1 items-center">
   <div>
   <img src="   https://cdn-icons-png.flaticon.com/512/18297/18297619.png " width="17" height="17" alt="" title="" class="img-small">
   </div>
-  <p class="text-black/70 font-normal text-base" >Gender: ${pet.gender ? `${pet.gender}` : 'unknown'}</p>
+  <p class="text-black/70 font-normal text-base" >Gender: ${pet.gender ? `${pet.gender}` : 'Not Available'}</p>
   </div>
   <div class="flex gap-1 items-center">
   <div>
  <img src="   https://cdn-icons-png.flaticon.com/512/2530/2530493.png " width="18" height="18" alt="" title="" class="img-small">
   </div>
-  <p class="text-black/70 font-normal text-base" >Price : ${pet.price ? `${pet.price} $` : 'unknown'}</p>
+  <p class="text-black/70 font-normal text-base" >Price : ${pet.price ? `${pet.price} $` : 'Not Available'}</p>
   </div>
     </div>
     <hr class="text-gray-200 my-4">
